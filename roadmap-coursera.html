@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Roadmap Coursera — Dirección & IA</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --navy: #0D1B2A;
+    --navy-mid: #1A2E45;
+    --navy-light: #243B55;
+    --blue-acc: #2E6DA4;
+    --ai-purple: #7B4FBF;
+    --ai-purple-light: #A07DD4;
+    --white: #F5F0E8;
+    --gray: #8A9BB0;
+    --success: #3DAA70;
+    --agent-green: #1A9E6E;
+    --agent-green-light: #2ECC9A;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Background texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 10% 20%, rgba(201,168,76,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 90% 80%, rgba(123,79,191,0.08) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HEADER */
+  header {
+    text-align: center;
+    margin-bottom: 50px;
+    animation: fadeDown 0.8s ease both;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 5px 16px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+  }
+
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 6vw, 48px);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    color: var(--white);
+  }
+
+  header h1 span {
+    color: var(--gold);
+  }
+
+  header p {
+    font-size: 15px;
+    color: var(--gray);
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* PROGRESS BAR */
+  .progress-section {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-bottom: 40px;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+
+  .progress-header span {
+    font-size: 13px;
+    color: var(--gray);
+    font-weight: 500;
+  }
+
+  .progress-header strong {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--gold);
+  }
+
+  .progress-bar-bg {
+    background: var(--navy);
+    border-radius: 8px;
+    height: 10px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    border-radius: 8px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    width: 0%;
+    transition: width 1s ease;
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 32px;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .tab {
+    flex: 1;
+    padding: 12px 8px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    background: var(--navy-mid);
+    color: var(--gray);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+  }
+
+  .tab:hover { border-color: var(--gold); color: var(--gold); }
+
+  .tab.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--navy);
+  }
+
+  .tab-icon { display: block; font-size: 20px; margin-bottom: 4px; }
+
+  /* PHASE LABEL */
+  .phase-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+    padding-left: 4px;
+  }
+
+  /* WEEK CARDS */
+  .weeks-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+
+  .week-card {
+    background: var(--navy-mid);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.2s;
+    cursor: pointer;
+  }
+
+  .week-card:hover {
+    border-color: rgba(201,168,76,0.4);
+    transform: translateX(4px);
+  }
+
+  .week-card.completed {
+    border-color: rgba(61,170,112,0.4);
+  }
+
+  .week-card.completed .week-num {
+    background: var(--success);
+  }
+
+  .week-card.ai-card .week-num {
+    background: var(--ai-purple);
+  }
+
+  .week-card.ai-card { border-color: rgba(123,79,191,0.2); }
+  .week-card.ai-card:hover { border-color: rgba(160,125,212,0.5); }
+
+  .week-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+  }
+
+  .week-num {
+    min-width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: var(--blue-acc);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.8);
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  .week-num strong {
+    font-size: 20px;
+    line-height: 1;
+    color: white;
+    letter-spacing: 0;
+  }
+
+  .week-info { flex: 1; }
+
+  .week-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+
+  .week-subtitle {
+    font-size: 12px;
+    color: var(--gray);
+  }
+
+  .week-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .week-hours {
+    font-size: 11px;
+    color: var(--gray);
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .check-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.2);
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    flex-shrink: 0;
+    font-size: 14px;
+    color: transparent;
+  }
+
+  .check-btn:hover { border-color: var(--success); }
+
+  .week-card.completed .check-btn {
+    background: var(--success);
+    border-color: var(--success);
+    color: white;
+  }
+
+  /* EXPANDED CONTENT */
+  .week-body {
+    display: none;
+    padding: 0 20px 20px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    margin-top: 0;
+    padding-top: 16px;
+  }
+
+  .week-card.open .week-body { display: block; }
+
+  .week-desc {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+
+  .course-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--navy);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    transition: all 0.3s;
+  }
+
+  .course-link:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: translateX(4px);
+  }
+
+  .course-link.ai-link:hover {
+    border-color: var(--ai-purple-light);
+    color: var(--ai-purple-light);
+  }
+
+  .link-icon { font-size: 18px; flex-shrink: 0; }
+  .link-text { flex: 1; }
+  .link-platform {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 5px;
+    background: rgba(201,168,76,0.15);
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .course-link.ai-link .link-platform {
+    background: rgba(123,79,191,0.2);
+    color: var(--ai-purple-light);
+  }
+
+  .tip-box {
+    background: rgba(201,168,76,0.07);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: var(--gray);
+    margin-top: 12px;
+    line-height: 1.6;
+  }
+
+  .tip-box.ai-tip {
+    background: rgba(123,79,191,0.07);
+    border-left-color: var(--ai-purple);
+  }
+
+  /* PANEL VISIBILITY */
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* LEGEND */
+  .legend {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--gray);
+  }
+
+  .legend-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="badge">📚 Plan de Estudios Personalizado</div>
+    <h1>Tu Roadmap<br><span>Dirección & IA</span></h1>
+    <p>Equivalente a IPADE · 8 meses · Coursera Plus · Español & Inglés</p>
+  </header>
+
+  <!-- PROGRESO -->
+  <div class="progress-section">
+    <div class="progress-header">
+      <span>🎯 Progreso total del plan</span>
+      <strong id="progress-pct">0%</strong>
+    </div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progress-fill"></div>
+    </div>
+    <div style="margin-top:10px; font-size:12px; color:var(--gray);">
+      <span id="progress-label">0 de 16 semanas completadas</span>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('direccion')">
+      <span class="tab-icon">🏛️</span>
+      Dirección IPADE
+    </div>
+    <div class="tab" onclick="switchTab('ia')">
+      <span class="tab-icon">🤖</span>
+      Inteligencia Artificial
+    </div>
+    <div class="tab" onclick="switchTab('agentes')">
+      <span class="tab-icon">⚡</span>
+      Prompts & Agentes
+    </div>
+  </div>
+
+  <!-- ========================= PANEL DIRECCIÓN ========================= -->
+  <div class="panel active" id="panel-direccion">
+
+    <div class="phase-label">Fase 1 — Liderazgo Directivo · Semanas 1–4</div>
+    <div class="weeks-grid">
+
+      <div class="week-card" id="w1">
+        <div class="week-header" onclick="toggleWeek('w1')">
+          <div class="week-num"><span>SEM</span><strong>1</strong></div>
+          <div class="week-info">
+            <div class="week-title">Introducción al Liderazgo Estratégico</div>
+            <div class="week-subtitle">Illinois — Strategic Leadership & Mgmt · Curso 1</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~5 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'w1')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Fundamentos del liderazgo de personas y equipos. Aprenderás marcos para entender tu propio estilo directivo y cómo influir con intención en tu organización.</p>
+          <a class="course-link" href="https://www.coursera.org/specializations/strategic-leadership" target="_blank">
+            <span class="link-icon">🎯</span>
+            <span class="link-text">Strategic Leadership and Management — U. Illinois</span>
+            <span class="link-platform">Coursera</span>
+          </a>
+          <div class="tip-box">💡 <strong>Consejo:</strong> Activa los subtítulos en español. Esta especialización tiene 6 cursos — empieza por el primero: "Foundations of Everyday Leadership".</div>
+        </div>
+      </div>
+
+      <div class="week-card" id="w2">
+        <div class="week-header" onclick="toggleWeek('w2')">
+          <div class="week-num"><span>SEM</span><strong>2</strong></div>
+          <div class="week-info">
+            <div class="week-title">Equipos de Alto Rendimiento</div>
+            <div class="week-subtitle">Illinois — Liderazgo de Equipos · Curso 2</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~5 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'w2')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Cómo construir, motivar y dirigir equipos de alto desempeño. Dinámicas grupales, delegación efectiva y cómo generar cultura de resultados.</p>
+          <a class="course-link" href="https://www.coursera.org/learn/leading-teams" target="_blank">
+            <span class="link-icon">👥</span>
+            <span class="link-text">Leading Teams — U. Michigan</span>
+            <span class="link-platform">Coursera</span>
+          </a>
+          <div class="tip-box">💡 Pon atención a los casos de estudio: son situaciones reales que encontrarás como directivo.</div>
+        </div>
+      </div>
+
+      <div class="week-card" id="w3">
+        <div class="week-header" onclick="toggleWeek('w3')">
+          <div class="week-num"><span>SEM</span><strong>3</strong></div>
+          <div class="week-info">
+            <div class="week-title">Visión Estratégica y Toma de Decisiones</div>
+            <div class="week-subtitle">Dartmouth — Strategic Leadership · Finkelstein</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~6 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'w3')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Neurociencia detrás de las decisiones ejecutivas. Por qué los líderes brillantes fallan y cómo evitar los errores más costosos. Pensamiento estratégico de largo plazo.</p>
+          <a class="course-link" href="https://www.coursera.org/specializations/strategic-leadership-impact-change-decision-making" target="_blank">
+            <span class="link-icon">🧠</span>
+            <span class="link-text">Strategic Leadership: Impact, Change & Decision-Making — Dartmouth</span>
+            <span class="link-platform">Coursera</span>
+          </a>
+          <div class="tip-box">💡 Sidney Finkelstein es autor de "Why Smart Executives Fail" — uno de los mejores cursos de liderazgo en toda la plataforma.</div>
+        </div>
+      </div>
+
+      <div class="week-card" id="w4">
+        <div class="week-header" onclick="toggleWeek('w4')">
+          <div class="week-num"><span>SEM</span><strong>4</strong></div>
+          <div class="week-info">
+            <div class="week-title">Comunicación Ejecutiva e Influencia</div>
+            <div class="week-subtitle">Yale — Executive Communication</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~5 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'w4')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Cómo comunicar con impacto, construir credibilidad y persuadir a stakeholders clave. Habilidades de presentación ejecutiva y comunicación en situaciones de alta presión.</p>
+          <a class="course-link" href="https://www.coursera.org/learn/presentation-skills" target="_blank">
+            <span class="link-icon">🎤</span>
+            <span class="link-text">Introduction to Public Speaking — U. Washington</span>
+            <span class="link-platform">Coursera</span>
+          </a>
+          <a class="course-link" href="https://www.coursera.org/learn/communication-skills-executives" target="_blank">
+            <span class="link-icon">💼</span>
+            <span class="link-text">Communication Skills for Executives — Various</span>
+            <span class="link-platform">Coursera</span>
+          </a>
+          <div class="tip-box">💡 Graba un video de 3 minutos simulando un discurso ejecutivo. Es el ejercicio más valioso de esta semana.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <br>
+    <div class="phase-label">Fase 2 — Negociación Empresarial · Semanas 5–8</div>
+    <div class="weeks-grid">
+
+      <div class="week-card" id="w5">
+        <div class="week-header" onclick="toggleWeek('w5')">
+          <div class="week-num"><span>SEM</span><strong>5</strong></div>
+          <div class="week-info">
+            <div class="week-title">Fundamentos de Negociación</div>
+            <div class="week-subtitle">Yale — Introduction to Negotiation · Barry Nalebuff</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~6 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'w5')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">El playbook estratégico de negociación de Yale. Teoría de juegos aplicada, preparación de escenarios, BATNA y cómo crear valor en cada negociación.</p>
+          <a class="course-link" href="https://www.coursera.org/learn/negotiation" target="_blank">
+            <span class="link-icon">🤝</span>
+            <span class="link-text">Introduction to Negotiation: A Strategic Playbook — Yale</span>
+            <span class="link-platform">Coursera</span>
+          </a>
+          <div class="tip-box">💡 Este es uno de los cursos con mejor calificación en toda Coursera (4.9★). Completa todas las simulaciones — son el núcleo del aprendizaje.</div>
+        </div>
+      </div>
+
+      <div class="week-card" id="w6">
+        <div class="week-header" onclick="toggleWeek('w6')">
+          <div class="week-num"><span>SEM</span><strong>6</strong></div>
+          <div class="week-info">
+            <div class="week-title">Estrategias y Tácticas de Negociación</div>
+            <div class="week-subtitle">Michigan — Successful Negotiation · George Siedel</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~5 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'w6')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Las 4 etapas de toda negociación exitosa. Cómo preparar tu análisis previo, manejar tácticas difíciles y cerrar acuerdos duraderos.</p>
+          <a class="course-link" href="https://www.coursera.org/learn/negotiation-skills" target="_blank">
+            <span class="link-icon">⚡</span>
+            <span class="link-text">Successful Negotiation: Essential Strategies and Skills — U. Michigan</span>
+            <span class="link-platform">Coursera</span>
+          </a>
+          <div class="tip-box">💡 Practica las simulaciones con un colega o familiar — negociar en vivo es la forma más rápida de aprender.</div>
+        </div>
+      </div>
+
+      <div class="week-card" id="w7">
+        <div class="week-header" onclick="toggleWeek('w7')">
+          <div class="week-num"><span>SEM</span><strong>7</strong></div>
+          <div class="week-info">
+            <div class="week-title">Negociación Intercultural y Mediación</div>
+            <div class="week-subtitle">ESSEC Business School — Conflict Resolution</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~5 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'w7')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Habilidades interculturales de negociación y técnicas de mediación para resolver conflictos complejos dentro y fuera de la organización.</p>
+          <a class="course-link" href="https://www.coursera.org/specializations/negotiation-mediation-conflict-resolution" target="_blank">
+            <span class="link-icon">🌍</span>
+            <span class="link-text">Negotiation, Mediation and Conflict Resolution — ESSEC Business School</span>
+            <span class="link-platform">Coursera</span>
+          </a>
+          <div class="tip-box">💡 Aplica las técnicas de mediación en tu próxima reunión de equipo donde haya tensión. Es el laboratorio más valioso.</div>
+        </div>
+      </div>
+
+      <div class="week-card" id="w8">
+        <div class="week-header" onclick="toggleWeek('w8')">
+          <div class="week-num"><span>SEM</span><strong>8</strong></div>
+          <div class="week-info">
+            <div class="week-title">Semana de Consolidación — Negociación</div>
+            <div class="week-subtitle">Revisión · Casos prácticos · Reflexión</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~3 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'w8')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Semana para consolidar. Revisa tus notas, escribe un diario de 3 negociaciones recientes aplicando los marcos aprendidos y prepárate para la fase de Transformación.</p>
+          <a class="course-link" href="https://www.coursera.org/learn/negotiation" target="_blank">
+            <span class="link-icon">📋</span>
+            <span class="link-text">Completa cualquier módulo pendiente de Yale — Negotiation</span>
+            <span class="link-platform">Coursera</span>
+          </a>
+          <div class="tip-box">💡 Escribe: ¿Cuál fue mi mejor negociación este mes y qué hubiera hecho diferente con lo que aprendí?</div>
+        </div>
+      </div>
+
+    </div>
+
+    <br>
+    <div class="phase-label">Fase 3 — Transformación Organizacional · Semanas 9–16</div>
+    <div class="weeks-grid">
+
+      <div class="week-card" id="w9">
+        <div class="week-header" onclick="toggleWeek('w9')">
+          <div class="week-num"><span>SEM</span><strong>9</strong></div>
+          <div class="week-info">
+            <div class="week-title">Fundamentos del Cambio Organizacional</div>
+            <div class="week-subtitle">Starweaver — Executive Leadership Specialization</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~5 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'w9')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Marcos y metodologías para liderar procesos de cambio organizacional. Cómo gestionar la resistencia, comunicar la visión y mantener el momentum.</p>
+          <a class="course-link" href="https://www.coursera.org/specializations/complete-executive-leadership" target="_blank">
+            <span class="link-icon">🔄</span>
+            <span class="link-text">Complete Executive Leadership Specialization — Starweaver</span>
+            <span class="link-platform">Coursera</span>
+          </a>
+          <div class="tip-box">💡 Identifica un proceso de cambio en tu empresa actual que quieras liderar o mejorar — úsalo como caso de estudio personal.</div>
+        </div>
+      </div>
+
+      <div class="week-card" id="w10">
+        <div class="week-header" onclick="toggleWeek('w10')">
+          <div class="week-num"><span>SEM</span><strong>10</strong></div>
+          <div class="week-info">
+            <div class="week-title">Cultura Organizacional y Poder de Influencia</div>
+            <div class="week-subtitle">Michigan — Leading Organizational Change</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~5 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'w10')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Cómo diagnosticar y transformar la cultura de una organización. El poder de la influencia informal y cómo movilizar a personas sin autoridad directa.</p>
+          <a class="course-link" href="https://www.coursera.org/learn/leading-organizational-change" target="_blank">
+            <span class="link-icon">🏗️</span>
+            <span class="link-text">Leading Organizational Change — U. Michigan</span>
+            <span class="link-platform">Coursera</span>
+          </a>
+          <div class="tip-box">💡 Mapea los "agentes de cambio" informales en tu organización. Son tu mayor aliado.</div>
+        </div>
+      </div>
+
+      <div class="week-card" id="w11">
+        <div class="week-header" onclick="toggleWeek('w11')">
+          <div class="week-num"><span>SEM</span><strong>11</strong></div>
+          <div class="week-info">
+            <div class="week-title">Gestión del Cambio: Kotter y McKinsey</div>
+            <div class="week-subtitle">Coursera — Change Management Frameworks</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~5 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'w11')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Frameworks clásicos y modernos de gestión del cambio: Kotter 8 pasos, McKinsey 7-S, ADKAR. Cuándo y cómo aplicar cada uno.</p>
+          <a class="course-link" href="https://www.coursera.org/learn/change-management" target="_blank">
+            <span class="link-icon">📊</span>
+            <span class="link-text">Organizational Change and Transformation — Various</span>
+            <span class="link-platform">Coursera</span>
+          </a>
+          <div class="tip-box">💡 Elige uno de estos frameworks y aplícalo a un proyecto real. La teoría sin práctica no transforma.</div>
+        </div>
+      </div>
+
+      <div class="week-card" id="w12">
+        <div class="week-header" onclick="toggleWeek('w12')">
+          <div class="week-num"><span>SEM</span><strong>12</strong></div>
+          <div class="week-info">
+            <div class="week-title">Ética Directiva y Responsabilidad</div>
+            <div class="week-subtitle">Santa Clara / Wharton — Business Ethics</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~4 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'w12')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Toma de decisiones éticas en el liderazgo. Dilemas empresariales reales, gobierno corporativo y cómo construir organizaciones con integridad.</p>
+          <a class="course-link" href="https://www.coursera.org/learn/business-ethics" target="_blank">
+            <span class="link-icon">⚖️</span>
+            <span class="link-text">An Introduction to Business Ethics — DePaul University</span>
+            <span class="link-platform">Coursera</span>
+          </a>
+          <div class="tip-box">💡 IPADE es conocido por su énfasis en ética. Este módulo es el corazón del programa D-1.</div>
+        </div>
+      </div>
+
+      <div class="week-card" id="w13">
+        <div class="week-header" onclick="toggleWeek('w13')">
+          <div class="week-num"><span>SEM</span><strong>13</strong></div>
+          <div class="week-info">
+            <div class="week-title">Finanzas para Directivos No Financieros</div>
+            <div class="week-subtitle">Wharton — Finance for Non-Finance Managers</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~5 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'w13')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Leer estados financieros, entender el P&L, ROI, flujo de caja y cómo tomar decisiones estratégicas con criterio financiero sólido.</p>
+          <a class="course-link" href="https://www.coursera.org/learn/finance-for-non-finance-managers" target="_blank">
+            <span class="link-icon">💰</span>
+            <span class="link-text">Finance for Non-Finance Managers — Various</span>
+            <span class="link-platform">Coursera</span>
+          </a>
+          <div class="tip-box">💡 Todo director debe poder "leer" un estado financiero. Este curso cubre exactamente lo que necesitas sin ser contador.</div>
+        </div>
+      </div>
+
+      <div class="week-card" id="w14">
+        <div class="week-header" onclick="toggleWeek('w14')">
+          <div class="week-num"><span>SEM</span><strong>14</strong></div>
+          <div class="week-info">
+            <div class="week-title">Estrategia Empresarial Avanzada</div>
+            <div class="week-subtitle">Copenhagen / HEC Paris — Business Strategy</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~5 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'w14')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Análisis competitivo avanzado, ventajas competitivas sostenibles, Porter, océano azul y cómo diseñar estrategias ganadoras en mercados complejos.</p>
+          <a class="course-link" href="https://www.coursera.org/learn/strategy" target="_blank">
+            <span class="link-icon">♟️</span>
+            <span class="link-text">Strategic Management & Innovation — Copenhagen Business School</span>
+            <span class="link-platform">Coursera</span>
+          </a>
+          <div class="tip-box">💡 Combina este curso con el análisis de un competidor de tu industria como ejercicio práctico.</div>
+        </div>
+      </div>
+
+      <div class="week-card" id="w15">
+        <div class="week-header" onclick="toggleWeek('w15')">
+          <div class="week-num"><span>SEM</span><strong>15</strong></div>
+          <div class="week-info">
+            <div class="week-title">Innovación y Pensamiento Disruptivo</div>
+            <div class="week-subtitle">Stanford / Wharton — Innovation Management</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~5 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'w15')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Cómo crear culturas innovadoras, gestionar la innovación como proceso y liderar organizaciones que se adaptan al cambio constante.</p>
+          <a class="course-link" href="https://www.coursera.org/learn/innovation-management" target="_blank">
+            <span class="link-icon">💡</span>
+            <span class="link-text">Innovation Management — Erasmus University Rotterdam</span>
+            <span class="link-platform">Coursera</span>
+          </a>
+          <div class="tip-box">💡 La innovación no es un evento, es un sistema. Este curso te enseña a construir ese sistema.</div>
+        </div>
+      </div>
+
+      <div class="week-card" id="w16">
+        <div class="week-header" onclick="toggleWeek('w16')">
+          <div class="week-num"><span>SEM</span><strong>16</strong></div>
+          <div class="week-info">
+            <div class="week-title">🏆 Capstone — Integración y Plan de Acción</div>
+            <div class="week-subtitle">Semana de cierre · Reflexión estratégica personal</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~3 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'w16')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Integra todo lo aprendido. Escribe tu Plan de Desarrollo Directivo: ¿Quién eres como líder hoy? ¿A dónde vas en los próximos 3 años? ¿Qué cambiarás la próxima semana?</p>
+          <a class="course-link" href="https://www.coursera.org/specializations/strategic-leadership" target="_blank">
+            <span class="link-icon">🎓</span>
+            <span class="link-text">Capstone: Strategic Leadership Specialization — Illinois</span>
+            <span class="link-platform">Coursera</span>
+          </a>
+          <div class="tip-box">💡 Comparte tu plan con alguien de confianza. Los compromisos públicos tienen el doble de probabilidad de cumplirse.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================= PANEL IA ========================= -->
+  <div class="panel" id="panel-ia">
+
+    <div class="phase-label">Fase 1 — IA sin código · Semanas 1–3</div>
+    <div class="weeks-grid">
+
+      <div class="week-card ai-card" id="ia1">
+        <div class="week-header" onclick="toggleWeek('ia1')">
+          <div class="week-num" style="background:var(--ai-purple)"><span>SEM</span><strong>1</strong></div>
+          <div class="week-info">
+            <div class="week-title">¿Qué es la Inteligencia Artificial?</div>
+            <div class="week-subtitle">DeepLearning.AI — AI for Everyone · Andrew Ng</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~6 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'ia1')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">El curso de introducción más famoso del mundo para no-técnicos. Qué puede y qué no puede hacer la IA, cómo impacta los negocios y cómo hablar el idioma de tus equipos de tecnología.</p>
+          <a class="course-link ai-link" href="https://www.coursera.org/learn/ai-for-everyone" target="_blank">
+            <span class="link-icon">🤖</span>
+            <span class="link-text">AI for Everyone — Andrew Ng / DeepLearning.AI</span>
+            <span class="link-platform">Coursera</span>
+          </a>
+          <div class="tip-box ai-tip">💡 Este curso tiene ~6 horas. Puedes completarlo en un fin de semana. Es el mejor punto de partida que existe para directivos.</div>
+        </div>
+      </div>
+
+      <div class="week-card ai-card" id="ia2">
+        <div class="week-header" onclick="toggleWeek('ia2')">
+          <div class="week-num" style="background:var(--ai-purple)"><span>SEM</span><strong>2</strong></div>
+          <div class="week-info">
+            <div class="week-title">Herramientas de IA Generativa en tu Día a Día</div>
+            <div class="week-subtitle">Google — Generative AI Fundamentals</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~5 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'ia2')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Qué son los LLMs (ChatGPT, Claude, Gemini), cómo funcionan y cómo usarlos para ser más productivo. Conceptos de Generative AI sin matemáticas.</p>
+          <a class="course-link ai-link" href="https://www.coursera.org/learn/introduction-to-generative-ai" target="_blank">
+            <span class="link-icon">✨</span>
+            <span class="link-text">Introduction to Generative AI — Google Cloud</span>
+            <span class="link-platform">Coursera</span>
+          </a>
+          <a class="course-link ai-link" href="https://www.coursera.org/learn/prompt-engineering" target="_blank">
+            <span class="link-icon">💬</span>
+            <span class="link-text">Prompt Engineering for Everyone — IBM</span>
+            <span class="link-platform">Coursera</span>
+          </a>
+          <div class="tip-box ai-tip">💡 Esta semana: usa ChatGPT o Claude para preparar una reunión, redactar un email difícil y generar ideas para un problema real. Aprende haciendo.</div>
+        </div>
+      </div>
+
+      <div class="week-card ai-card" id="ia3">
+        <div class="week-header" onclick="toggleWeek('ia3')">
+          <div class="week-num" style="background:var(--ai-purple)"><span>SEM</span><strong>3</strong></div>
+          <div class="week-info">
+            <div class="week-title">IA y Ética: Riesgos y Responsabilidad</div>
+            <div class="week-subtitle">DeepLearning.AI — AI Ethics & Society</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~4 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'ia3')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Sesgos en la IA, privacidad de datos, responsabilidad corporativa y cómo tomar decisiones éticas al implementar IA en tu organización.</p>
+          <a class="course-link ai-link" href="https://www.coursera.org/learn/ai-for-good" target="_blank">
+            <span class="link-icon">⚖️</span>
+            <span class="link-text">AI for Good — DeepLearning.AI</span>
+            <span class="link-platform">Coursera</span>
+          </a>
+          <div class="tip-box ai-tip">💡 Como directivo, tú serás quien tome decisiones sobre implementar IA. Entender los riesgos éticos es tan importante como entender el potencial.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <br>
+    <div class="phase-label">Fase 2 — IA Aplicada a Negocios · Semanas 4–7</div>
+    <div class="weeks-grid">
+
+      <div class="week-card ai-card" id="ia4">
+        <div class="week-header" onclick="toggleWeek('ia4')">
+          <div class="week-num" style="background:var(--ai-purple)"><span>SEM</span><strong>4</strong></div>
+          <div class="week-info">
+            <div class="week-title">IA para Líderes de Negocio — Wharton</div>
+            <div class="week-subtitle">Penn / Wharton — AI for Business Specialization</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~6 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'ia4')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Cómo la IA transforma marketing, operaciones, finanzas y recursos humanos. Casos reales de empresas líderes y frameworks para identificar oportunidades de IA en tu negocio.</p>
+          <a class="course-link ai-link" href="https://www.coursera.org/specializations/ai-for-business-wharton" target="_blank">
+            <span class="link-icon">📈</span>
+            <span class="link-text">AI for Business Specialization — Wharton / UPenn</span>
+            <span class="link-platform">Coursera</span>
+          </a>
+          <div class="tip-box ai-tip">💡 El curso de Wharton es el más prestigioso para ejecutivos. Incluye casos reales de cómo empresas Fortune 500 están usando IA.</div>
+        </div>
+      </div>
+
+      <div class="week-card ai-card" id="ia5">
+        <div class="week-header" onclick="toggleWeek('ia5')">
+          <div class="week-num" style="background:var(--ai-purple)"><span>SEM</span><strong>5</strong></div>
+          <div class="week-info">
+            <div class="week-title">IA en Operaciones y Toma de Decisiones</div>
+            <div class="week-subtitle">Oxford Saïd — AI Foundations for Business</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~5 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'ia5')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Cómo integrar IA en procesos de toma de decisiones. Modelos predictivos, automatización de procesos y evaluación de riesgos en proyectos de IA.</p>
+          <a class="course-link ai-link" href="https://www.coursera.org/specializations/ai-foundations-business-professionals" target="_blank">
+            <span class="link-icon">🏛️</span>
+            <span class="link-text">AI Foundations for Business Professionals — Oxford Saïd</span>
+            <span class="link-platform">Coursera</span>
+          </a>
+          <div class="tip-box ai-tip">💡 Diseña un "AI Use Case Canvas" para tu empresa: ¿Qué proceso cambiarías primero con IA y por qué?</div>
+        </div>
+      </div>
+
+      <div class="week-card ai-card" id="ia6">
+        <div class="week-header" onclick="toggleWeek('ia6')">
+          <div class="week-num" style="background:var(--ai-purple)"><span>SEM</span><strong>6</strong></div>
+          <div class="week-info">
+            <div class="week-title">Machine Learning para Directivos</div>
+            <div class="week-subtitle">Entender ML sin programar — Google / Andrew Ng</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~5 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'ia6')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Qué es el Machine Learning, cuándo usarlo, cómo evaluar proyectos de ML y cómo trabajar con equipos de data science. Para directivos, no para ingenieros.</p>
+          <a class="course-link ai-link" href="https://www.coursera.org/learn/machine-learning-for-all" target="_blank">
+            <span class="link-icon">🔬</span>
+            <span class="link-text">Machine Learning for All — University College London</span>
+            <span class="link-platform">Coursera</span>
+          </a>
+          <div class="tip-box ai-tip">💡 No necesitas aprender a programar. Este curso es 100% conceptual y diseñado para tomadores de decisiones.</div>
+        </div>
+      </div>
+
+      <div class="week-card ai-card" id="ia7">
+        <div class="week-header" onclick="toggleWeek('ia7')">
+          <div class="week-num" style="background:var(--ai-purple)"><span>SEM</span><strong>7</strong></div>
+          <div class="week-info">
+            <div class="week-title">Estrategia de IA para tu Organización</div>
+            <div class="week-subtitle">IBM — AI Enterprise Strategy</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~5 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'ia7')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Cómo diseñar una estrategia de IA para tu empresa. Casos de uso prioritarios, cómo construir el equipo correcto, métricas de éxito y cómo escalar iniciativas de IA.</p>
+          <a class="course-link ai-link" href="https://www.coursera.org/learn/ai-strategy-competitive-advantage" target="_blank">
+            <span class="link-icon">🚀</span>
+            <span class="link-text">AI Strategy for Competitive Advantage — Various</span>
+            <span class="link-platform">Coursera</span>
+          </a>
+          <div class="tip-box ai-tip">💡 Al terminar este módulo, deberías poder presentar ante tu consejo directivo una propuesta de estrategia de IA para tu empresa.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <br>
+    <div class="phase-label">Fase 3 — IA Generativa Avanzada · Semanas 8–10</div>
+    <div class="weeks-grid">
+
+      <div class="week-card ai-card" id="ia8">
+        <div class="week-header" onclick="toggleWeek('ia8')">
+          <div class="week-num" style="background:var(--ai-purple)"><span>SEM</span><strong>8</strong></div>
+          <div class="week-info">
+            <div class="week-title">Prompt Engineering Avanzado</div>
+            <div class="week-subtitle">DeepLearning.AI — ChatGPT Prompt Engineering</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~4 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'ia8')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Cómo escribir instrucciones que extraigan el máximo potencial de herramientas como ChatGPT, Claude y Gemini para uso ejecutivo y empresarial.</p>
+          <a class="course-link ai-link" href="https://www.coursera.org/projects/chatgpt-prompt-engineering-for-developers-project" target="_blank">
+            <span class="link-icon">✍️</span>
+            <span class="link-text">ChatGPT Prompt Engineering — DeepLearning.AI</span>
+            <span class="link-platform">Coursera</span>
+          </a>
+          <div class="tip-box ai-tip">💡 Crea tu propio "Prompt Playbook" ejecutivo: una colección de prompts listos para tus tareas más frecuentes (informes, emails, análisis).</div>
+        </div>
+      </div>
+
+      <div class="week-card ai-card" id="ia9">
+        <div class="week-header" onclick="toggleWeek('ia9')">
+          <div class="week-num" style="background:var(--ai-purple)"><span>SEM</span><strong>9</strong></div>
+          <div class="week-info">
+            <div class="week-title">IA Generativa en el Trabajo Ejecutivo</div>
+            <div class="week-subtitle">Starweaver — Executive Leadership con GenAI</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~4 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'ia9')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Cómo usar IA generativa para comunicación ejecutiva, diseño de estrategias de cambio, preparación de juntas directivas y liderazgo de transformación.</p>
+          <a class="course-link ai-link" href="https://www.coursera.org/specializations/complete-executive-leadership" target="_blank">
+            <span class="link-icon">💼</span>
+            <span class="link-text">Complete Executive Leadership con GenAI — Starweaver</span>
+            <span class="link-platform">Coursera</span>
+          </a>
+          <div class="tip-box ai-tip">💡 Usa IA para preparar la agenda de tu próxima reunión y prueba si notas diferencia en la calidad. Este es el ROI inmediato del plan.</div>
+        </div>
+      </div>
+
+      <div class="week-card ai-card" id="ia10">
+        <div class="week-header" onclick="toggleWeek('ia10')">
+          <div class="week-num" style="background:var(--ai-purple)"><span>SEM</span><strong>10</strong></div>
+          <div class="week-info">
+            <div class="week-title">🏆 Capstone IA — Tu Estrategia Personal</div>
+            <div class="week-subtitle">Reflexión final · Plan de implementación</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~3 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'ia10')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Consolida tu conocimiento. Crea tu "AI Implementation Roadmap" personal: ¿Qué 3 procesos de tu trabajo vas a mejorar con IA en los próximos 90 días?</p>
+          <a class="course-link ai-link" href="https://www.coursera.org/specializations/ai-for-business-wharton" target="_blank">
+            <span class="link-icon">🎓</span>
+            <span class="link-text">Completa el Capstone de Wharton AI for Business</span>
+            <span class="link-platform">Coursera</span>
+          </a>
+          <div class="tip-box ai-tip">💡 El directivo del futuro no es el que más sabe de IA — es el que mejor sabe integrarla para tomar mejores decisiones más rápido.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================= PANEL AGENTES ========================= -->
+  <div class="panel" id="panel-agentes">
+
+    <div class="phase-label" style="color:var(--agent-green-light)">Fase 0 — Base técnica indispensable · Semanas 1–2</div>
+    <div class="weeks-grid">
+
+      <div class="week-card" id="ag0" style="border-color:rgba(26,158,110,0.2)">
+        <div class="week-header" onclick="toggleWeek('ag0')">
+          <div class="week-num" style="background:var(--agent-green)"><span>SEM</span><strong>1</strong></div>
+          <div class="week-info">
+            <div class="week-title">Python Crash Course — Base para todo lo demás</div>
+            <div class="week-subtitle">Google — Crash Course on Python · Sin experiencia previa</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~15 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'ag0')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">No puedes construir agentes sin Python. Pero la buena noticia: no necesitas ser experto — solo necesitas lo suficiente para trabajar con LangChain. Este curso de Google te lleva de cero a escribir scripts funcionales en 2 semanas.</p>
+          <a class="course-link" href="https://www.coursera.org/learn/python-crash-course" target="_blank" style="border-color:rgba(26,158,110,0.3)">
+            <span class="link-icon">🐍</span>
+            <span class="link-text">Crash Course on Python — Google</span>
+            <span class="link-platform" style="background:rgba(26,158,110,0.2);color:var(--agent-green-light)">Coursera</span>
+          </a>
+          <a class="course-link" href="https://www.coursera.org/learn/python" target="_blank" style="border-color:rgba(26,158,110,0.3)">
+            <span class="link-icon">📚</span>
+            <span class="link-text">Programming for Everybody — U. Michigan (alternativa más suave)</span>
+            <span class="link-platform" style="background:rgba(26,158,110,0.2);color:var(--agent-green-light)">Coursera</span>
+          </a>
+          <div class="tip-box" style="border-left-color:var(--agent-green);background:rgba(26,158,110,0.07)">💡 <strong>Semana 1:</strong> Instala VS Code + Python. Tu primer objetivo: escribir un script que lea un archivo .txt y lo resuma con la API de OpenAI. Eso ya es un mini-agente.</div>
+        </div>
+      </div>
+
+      <div class="week-card" id="ag0b" style="border-color:rgba(26,158,110,0.2)">
+        <div class="week-header" onclick="toggleWeek('ag0b')">
+          <div class="week-num" style="background:var(--agent-green)"><span>SEM</span><strong>2</strong></div>
+          <div class="week-info">
+            <div class="week-title">APIs, JSON y cómo hablar con modelos de IA</div>
+            <div class="week-subtitle">Python for Everybody — APIs y Web Data · Michigan</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~8 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'ag0b')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Para construir agentes necesitas entender cómo funcionan las APIs REST y el formato JSON — que es la "lengua" en que hablan los modelos de IA. Esta semana dominas eso.</p>
+          <a class="course-link" href="https://www.coursera.org/learn/python-accessing-web-data" target="_blank" style="border-color:rgba(26,158,110,0.3)">
+            <span class="link-icon">🌐</span>
+            <span class="link-text">Using Python to Access Web Data — U. Michigan</span>
+            <span class="link-platform" style="background:rgba(26,158,110,0.2);color:var(--agent-green-light)">Coursera</span>
+          </a>
+          <div class="tip-box" style="border-left-color:var(--agent-green);background:rgba(26,158,110,0.07)">💡 Al terminar esta semana: haz tu primera llamada a la API de OpenAI o Anthropic desde Python. Esto es literalmente la base de todos los agentes.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <br>
+    <div class="phase-label" style="color:var(--agent-green-light)">Fase 1 — Prompt Engineering profesional · Semanas 3–4</div>
+    <div class="weeks-grid">
+
+      <div class="week-card" id="ag1" style="border-color:rgba(26,158,110,0.2)">
+        <div class="week-header" onclick="toggleWeek('ag1')">
+          <div class="week-num" style="background:var(--agent-green)"><span>SEM</span><strong>3</strong></div>
+          <div class="week-info">
+            <div class="week-title">Prompt Engineering: del básico al avanzado</div>
+            <div class="week-subtitle">DeepLearning.AI — ChatGPT Prompt Engineering + Functions</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~6 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'ag1')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Técnicas avanzadas: Chain of Thought, Few-Shot prompting, ReAct, prompts con roles, prompts para código, prompts para análisis de datos. Lo que separa respuestas mediocres de respuestas extraordinarias.</p>
+          <a class="course-link" href="https://www.coursera.org/projects/chatgpt-prompt-engineering-for-developers-project" target="_blank" style="border-color:rgba(26,158,110,0.3)">
+            <span class="link-icon">✍️</span>
+            <span class="link-text">ChatGPT Prompt Engineering for Developers — DeepLearning.AI</span>
+            <span class="link-platform" style="background:rgba(26,158,110,0.2);color:var(--agent-green-light)">Coursera</span>
+          </a>
+          <a class="course-link" href="https://www.coursera.org/projects/functions-tools-and-agents-with-langchain-project" target="_blank" style="border-color:rgba(26,158,110,0.3)">
+            <span class="link-icon">🔧</span>
+            <span class="link-text">Functions, Tools and Agents with LangChain — DeepLearning.AI</span>
+            <span class="link-platform" style="background:rgba(26,158,110,0.2);color:var(--agent-green-light)">Coursera</span>
+          </a>
+          <div class="tip-box" style="border-left-color:var(--agent-green);background:rgba(26,158,110,0.07)">💡 Crea tu <strong>Prompt Playbook personal</strong>: un archivo con 20 prompts listos para: revisar código, resumir reportes, analizar logs de Airflow, generar documentación técnica.</div>
+        </div>
+      </div>
+
+      <div class="week-card" id="ag2" style="border-color:rgba(26,158,110,0.2)">
+        <div class="week-header" onclick="toggleWeek('ag2')">
+          <div class="week-num" style="background:var(--agent-green)"><span>SEM</span><strong>4</strong></div>
+          <div class="week-info">
+            <div class="week-title">LangChain: el framework para construir agentes</div>
+            <div class="week-subtitle">DeepLearning.AI — LangChain for LLM App Dev · Harrison Chase</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~6 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'ag2')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">LangChain es el framework más popular para conectar LLMs con herramientas externas. Este curso lo da el mismísimo creador de LangChain junto a Andrew Ng. Chains, memoria, agentes simples.</p>
+          <a class="course-link" href="https://www.coursera.org/projects/langchain-for-llm-application-development-project" target="_blank" style="border-color:rgba(26,158,110,0.3)">
+            <span class="link-icon">⛓️</span>
+            <span class="link-text">LangChain for LLM Application Development — DeepLearning.AI + Harrison Chase</span>
+            <span class="link-platform" style="background:rgba(26,158,110,0.2);color:var(--agent-green-light)">Coursera</span>
+          </a>
+          <div class="tip-box" style="border-left-color:var(--agent-green);background:rgba(26,158,110,0.07)">💡 <strong>Proyecto de semana:</strong> Construye un agente que lea PDFs de reportes de tu empresa y responda preguntas sobre ellos. Esto es RAG básico y es inmediatamente útil.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <br>
+    <div class="phase-label" style="color:var(--agent-green-light)">Fase 2 — Construir agentes reales · Semanas 5–8</div>
+    <div class="weeks-grid">
+
+      <div class="week-card" id="ag3" style="border-color:rgba(26,158,110,0.2)">
+        <div class="week-header" onclick="toggleWeek('ag3')">
+          <div class="week-num" style="background:var(--agent-green)"><span>SEM</span><strong>5</strong></div>
+          <div class="week-info">
+            <div class="week-title">Fundamentos de AI Agents con LangChain</div>
+            <div class="week-subtitle">IBM — Fundamentals of Building AI Agents · Coursera</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~8 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'ag3')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Diseña agentes que razonan, toman acciones y usan herramientas externas. Tool calling, LCEL, agentes que ejecutan SQL, generan visualizaciones y analizan datos con lenguaje natural.</p>
+          <a class="course-link" href="https://www.coursera.org/learn/fundamentals-of-building-ai-agents" target="_blank" style="border-color:rgba(26,158,110,0.3)">
+            <span class="link-icon">🤖</span>
+            <span class="link-text">Fundamentals of Building AI Agents — IBM</span>
+            <span class="link-platform" style="background:rgba(26,158,110,0.2);color:var(--agent-green-light)">Coursera</span>
+          </a>
+          <div class="tip-box" style="border-left-color:var(--agent-green);background:rgba(26,158,110,0.07)">💡 <strong>Proyecto:</strong> Agente que conecte a tu base de datos y responda preguntas como "¿cuáles fueron los 5 DAGs más lentos esta semana en Airflow?" en lenguaje natural.</div>
+        </div>
+      </div>
+
+      <div class="week-card" id="ag4" style="border-color:rgba(26,158,110,0.2)">
+        <div class="week-header" onclick="toggleWeek('ag4')">
+          <div class="week-num" style="background:var(--agent-green)"><span>SEM</span><strong>6</strong></div>
+          <div class="week-info">
+            <div class="week-title">RAG: Agentes con memoria y documentos propios</div>
+            <div class="week-subtitle">IBM — Fundamentals AI Agents using RAG and LangChain</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~8 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'ag4')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Retrieval-Augmented Generation (RAG) te permite conectar tu agente con documentación interna, manuales técnicos, políticas de empresa o historial de errores de Airflow. El agente aprende de tus propios datos.</p>
+          <a class="course-link" href="https://www.coursera.org/learn/fundamentals-of-ai-agents-using-rag-and-langchain" target="_blank" style="border-color:rgba(26,158,110,0.3)">
+            <span class="link-icon">🗄️</span>
+            <span class="link-text">Fundamentals of AI Agents using RAG and LangChain — IBM</span>
+            <span class="link-platform" style="background:rgba(26,158,110,0.2);color:var(--agent-green-light)">Coursera</span>
+          </a>
+          <div class="tip-box" style="border-left-color:var(--agent-green);background:rgba(26,158,110,0.07)">💡 <strong>Proyecto clave:</strong> Agente que indexa toda la documentación técnica de tu equipo y responde preguntas de onboarding para nuevos desarrolladores automáticamente.</div>
+        </div>
+      </div>
+
+      <div class="week-card" id="ag5" style="border-color:rgba(26,158,110,0.2)">
+        <div class="week-header" onclick="toggleWeek('ag5')">
+          <div class="week-num" style="background:var(--agent-green)"><span>SEM</span><strong>7</strong></div>
+          <div class="week-info">
+            <div class="week-title">LangGraph: agentes con flujos y estados</div>
+            <div class="week-subtitle">DeepLearning.AI — AI Agents in LangGraph · Harrison Chase</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~8 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'ag5')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">LangGraph es la evolución de LangChain para agentes complejos: flujos condicionales, memoria persistente entre conversaciones, human-in-the-loop y workflows similares a Airflow pero con IA. Fundamental para automatizar revisión de código.</p>
+          <a class="course-link" href="https://www.coursera.org/projects/ai-agents-in-langgraph" target="_blank" style="border-color:rgba(26,158,110,0.3)">
+            <span class="link-icon">🕸️</span>
+            <span class="link-text">AI Agents in LangGraph — DeepLearning.AI + Harrison Chase</span>
+            <span class="link-platform" style="background:rgba(26,158,110,0.2);color:var(--agent-green-light)">Coursera</span>
+          </a>
+          <div class="tip-box" style="border-left-color:var(--agent-green);background:rgba(26,158,110,0.07)">💡 <strong>Proyecto estrella:</strong> Agente de revisión de código con LangGraph: recibe un PR, analiza el diff, sugiere mejoras, verifica estándares del equipo y genera un reporte automático.</div>
+        </div>
+      </div>
+
+      <div class="week-card" id="ag6" style="border-color:rgba(26,158,110,0.2)">
+        <div class="week-header" onclick="toggleWeek('ag6')">
+          <div class="week-num" style="background:var(--agent-green)"><span>SEM</span><strong>8</strong></div>
+          <div class="week-info">
+            <div class="week-title">Agentic AI con LangChain y LangGraph — IBM</div>
+            <div class="week-subtitle">Sistemas multi-agente · ReAct · Reflexion · Memoria</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~10 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'ag6')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Arquitecturas avanzadas de agentes: Reflection (el agente evalúa y mejora su propio output), ReAct (razona antes de actuar) y multi-agente (varios agentes especializados colaborando). Ideal para automatización compleja.</p>
+          <a class="course-link" href="https://www.coursera.org/learn/agentic-ai-with-langchain-and-langgraph" target="_blank" style="border-color:rgba(26,158,110,0.3)">
+            <span class="link-icon">⚡</span>
+            <span class="link-text">Agentic AI with LangChain and LangGraph — IBM</span>
+            <span class="link-platform" style="background:rgba(26,158,110,0.2);color:var(--agent-green-light)">Coursera</span>
+          </a>
+          <div class="tip-box" style="border-left-color:var(--agent-green);background:rgba(26,158,110,0.07)">💡 Aquí ya puedes construir: un agente que monitorea tus DAGs de Airflow, detecta fallos, diagnostica la causa y propone solución — todo automáticamente.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <br>
+    <div class="phase-label" style="color:var(--agent-green-light)">Fase 3 — Multi-agente & Automatización avanzada · Semanas 9–12</div>
+    <div class="weeks-grid">
+
+      <div class="week-card" id="ag7" style="border-color:rgba(26,158,110,0.2)">
+        <div class="week-header" onclick="toggleWeek('ag7')">
+          <div class="week-num" style="background:var(--agent-green)"><span>SEM</span><strong>9</strong></div>
+          <div class="week-info">
+            <div class="week-title">Sistemas Multi-Agente: CrewAI y AutoGen</div>
+            <div class="week-subtitle">IBM — Building AI Agents and Agentic Workflows Specialization</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~10 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'ag7')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">CrewAI te permite crear equipos de agentes especializados que colaboran: un agente analiza el código, otro verifica tests, otro documenta, otro genera el PR. AG2/AutoGen para sistemas más complejos de coordinación.</p>
+          <a class="course-link" href="https://www.coursera.org/specializations/building-ai-agents-and-agentic-workflows" target="_blank" style="border-color:rgba(26,158,110,0.3)">
+            <span class="link-icon">👥</span>
+            <span class="link-text">Building AI Agents and Agentic Workflows — IBM Specialization</span>
+            <span class="link-platform" style="background:rgba(26,158,110,0.2);color:var(--agent-green-light)">Coursera</span>
+          </a>
+          <div class="tip-box" style="border-left-color:var(--agent-green);background:rgba(26,158,110,0.07)">💡 <strong>Proyecto de equipo:</strong> "Crew" de 3 agentes para tu flujo de Airflow: Agente Monitor (detecta fallos) → Agente Diagnóstico (analiza logs) → Agente Reportero (notifica a Slack/Teams).</div>
+        </div>
+      </div>
+
+      <div class="week-card" id="ag8" style="border-color:rgba(26,158,110,0.2)">
+        <div class="week-header" onclick="toggleWeek('ag8')">
+          <div class="week-num" style="background:var(--agent-green)"><span>SEM</span><strong>10</strong></div>
+          <div class="week-info">
+            <div class="week-title">Agente de Revisión de Código — Proyecto Real</div>
+            <div class="week-subtitle">Proyecto práctico con GitHub API + LangGraph + LLM</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~10 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'ag8')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Esta semana no es un curso — es construcción pura. Combinas todo lo aprendido para crear tu agente de code review real: se conecta a GitHub, lee el diff del PR, lo evalúa según tus estándares y publica comentarios automáticos.</p>
+          <a class="course-link" href="https://www.coursera.org/learn/agentic-ai-with-langchain-and-langgraph" target="_blank" style="border-color:rgba(26,158,110,0.3)">
+            <span class="link-icon">🔍</span>
+            <span class="link-text">Referencia: Agentic AI con LangGraph — IBM (casos de tool calling)</span>
+            <span class="link-platform" style="background:rgba(26,158,110,0.2);color:var(--agent-green-light)">Coursera</span>
+          </a>
+          <div class="tip-box" style="border-left-color:var(--agent-green);background:rgba(26,158,110,0.07)">💡 <strong>Stack técnico:</strong> GitHub API + LangGraph + GPT-4o/Claude Sonnet + tus propias reglas de código en RAG. Resultado: tu equipo recibe feedback de IA en cada PR antes del review humano.</div>
+        </div>
+      </div>
+
+      <div class="week-card" id="ag9" style="border-color:rgba(26,158,110,0.2)">
+        <div class="week-header" onclick="toggleWeek('ag9')">
+          <div class="week-num" style="background:var(--agent-green)"><span>SEM</span><strong>11</strong></div>
+          <div class="week-info">
+            <div class="week-title">Automatización Airflow + Agentes IA</div>
+            <div class="week-subtitle">Proyecto: agente que monitorea y gestiona tus DAGs</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~10 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'ag9')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Conecta tus agentes a la API REST de Apache Airflow para monitorear DAGs, detectar fallos, reintentar ejecuciones y generar reportes. El agente puede incluso sugerir optimizaciones en tus pipelines analizando los logs históricos.</p>
+          <a class="course-link" href="https://www.coursera.org/specializations/ibm-rag-and-agentic-ai" target="_blank" style="border-color:rgba(26,158,110,0.3)">
+            <span class="link-icon">🌊</span>
+            <span class="link-text">IBM RAG and Agentic AI Professional Certificate (referencia)</span>
+            <span class="link-platform" style="background:rgba(26,158,110,0.2);color:var(--agent-green-light)">Coursera</span>
+          </a>
+          <div class="tip-box" style="border-left-color:var(--agent-green);background:rgba(26,158,110,0.07)">💡 <strong>Flujo final:</strong> DAG falla → Airflow webhook → Agente analiza logs → Diagnóstico automático → Notificación a Slack con causa + solución propuesta + link al log. Todo en &lt;2 minutos.</div>
+        </div>
+      </div>
+
+      <div class="week-card" id="ag10" style="border-color:rgba(26,158,110,0.2)">
+        <div class="week-header" onclick="toggleWeek('ag10')">
+          <div class="week-num" style="background:var(--agent-green)"><span>SEM</span><strong>12</strong></div>
+          <div class="week-info">
+            <div class="week-title">🏆 Capstone — Tu Asistente de Equipo completo</div>
+            <div class="week-subtitle">Integración final · Demo · Deploy</div>
+          </div>
+          <div class="week-right">
+            <div class="week-hours">~8 hrs</div>
+            <button class="check-btn" onclick="markDone(event,'ag10')">✓</button>
+          </div>
+        </div>
+        <div class="week-body">
+          <p class="week-desc">Integra todo en un asistente para tu equipo: responde preguntas sobre documentación interna, revisa código, monitorea Airflow y genera reportes semanales automáticamente. Hazlo accesible vía Slack o una interfaz web simple.</p>
+          <a class="course-link" href="https://www.coursera.org/specializations/building-ai-agents-and-agentic-workflows" target="_blank" style="border-color:rgba(26,158,110,0.3)">
+            <span class="link-icon">🎓</span>
+            <span class="link-text">Completa el Capstone — IBM Agentic Workflows Specialization</span>
+            <span class="link-platform" style="background:rgba(26,158,110,0.2);color:var(--agent-green-light)">Coursera</span>
+          </a>
+          <div class="tip-box" style="border-left-color:var(--agent-green);background:rgba(26,158,110,0.07)">💡 Al presentar este capstone ante tu equipo o dirección, no solo muestras lo que aprendiste — muestras el ROI concreto que la IA puede traer a tu organización. Eso es liderazgo técnico.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RESUMEN STACK -->
+    <br>
+    <div style="background:rgba(26,158,110,0.08);border:1px solid rgba(26,158,110,0.3);border-radius:14px;padding:24px;margin-top:8px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--agent-green-light);margin-bottom:14px">🛠️ Stack tecnológico que dominarás</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:13px;color:var(--gray)">
+        <div>🐍 <strong style="color:var(--white)">Python</strong> — Base</div>
+        <div>⛓️ <strong style="color:var(--white)">LangChain</strong> — Framework</div>
+        <div>🕸️ <strong style="color:var(--white)">LangGraph</strong> — Flujos</div>
+        <div>👥 <strong style="color:var(--white)">CrewAI</strong> — Multi-agente</div>
+        <div>🗄️ <strong style="color:var(--white)">RAG + Vectores</strong> — Memoria</div>
+        <div>🌊 <strong style="color:var(--white)">Airflow API</strong> — Pipelines</div>
+        <div>🔍 <strong style="color:var(--white)">GitHub API</strong> — Code Review</div>
+        <div>💬 <strong style="color:var(--white)">Slack API</strong> — Notificaciones</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<script>
+  const completedWeeks = new Set();
+
+  // ── Carga: URL hash tiene prioridad (portátil) → luego localStorage ──
+  function loadProgress() {
+    let data = '';
+    if (location.hash && location.hash.length > 1) {
+      try { data = decodeURIComponent(location.hash.slice(1)); } catch(e){}
+    }
+    if (!data) data = localStorage.getItem('completed') || '';
+    data.split(',').filter(Boolean).forEach(id => completedWeeks.add(id));
+  }
+
+  // ── Guarda en localStorage Y actualiza el hash ──
+  function saveProgress() {
+    const data = [...completedWeeks].join(',');
+    localStorage.setItem('completed', data);
+    history.replaceState(null, '', '#' + encodeURIComponent(data));
+    renderSyncBar();
+  }
+
+  function init() {
+    loadProgress();
+    completedWeeks.forEach(id => {
+      const card = document.getElementById(id);
+      if (card) card.classList.add('completed');
+    });
+    updateProgress();
+    renderSyncBar();
+  }
+
+  function toggleWeek(id) {
+    document.getElementById(id).classList.toggle('open');
+  }
+
+  function markDone(e, id) {
+    e.stopPropagation();
+    const card = document.getElementById(id);
+    if (completedWeeks.has(id)) {
+      completedWeeks.delete(id);
+      card.classList.remove('completed');
+    } else {
+      completedWeeks.add(id);
+      card.classList.add('completed');
+    }
+    saveProgress();
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const total = 38;
+    const done = completedWeeks.size;
+    const pct = Math.round((done / total) * 100);
+    document.getElementById('progress-pct').textContent = pct + '%';
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-label').textContent = `${done} de ${total} semanas completadas`;
+  }
+
+  function switchTab(tab) {
+    document.querySelectorAll('.tab').forEach((t, i) => {
+      t.classList.toggle('active',
+        (i === 0 && tab === 'direccion') ||
+        (i === 1 && tab === 'ia') ||
+        (i === 2 && tab === 'agentes')
+      );
+    });
+    document.getElementById('panel-direccion').classList.toggle('active', tab === 'direccion');
+    document.getElementById('panel-ia').classList.toggle('active', tab === 'ia');
+    document.getElementById('panel-agentes').classList.toggle('active', tab === 'agentes');
+  }
+
+  // ── Barra de sincronización flotante ──────────────────────────────
+  function renderSyncBar() {
+    let bar = document.getElementById('sync-bar');
+    if (!bar) {
+      bar = document.createElement('div');
+      bar.id = 'sync-bar';
+      bar.style.cssText = `
+        position:fixed;bottom:0;left:0;right:0;z-index:999;
+        background:#0D1B2A;border-top:1px solid rgba(201,168,76,0.25);
+        padding:12px 20px;display:flex;align-items:center;
+        gap:12px;justify-content:space-between;flex-wrap:wrap;
+      `;
+      document.body.appendChild(bar);
+    }
+    const url = location.origin + location.pathname + '#' + encodeURIComponent([...completedWeeks].join(','));
+    bar.innerHTML = `
+      <span style="font-size:12px;color:#8A9BB0;font-family:'DM Sans',sans-serif;flex:1;min-width:200px">
+        🔗 <strong style="color:#F5F0E8">Portátil:</strong>
+        copia esta URL con tu progreso guardado y ábrela desde cualquier dispositivo
+      </span>
+      <div style="display:flex;gap:8px;flex-shrink:0">
+        <button id="copy-btn" onclick="copyUrl('${url}')" style="
+          background:#C9A84C;border:none;border-radius:8px;
+          color:#0D1B2A;font-size:12px;font-weight:700;
+          padding:8px 16px;cursor:pointer;font-family:'DM Sans',sans-serif;
+        ">📋 Copiar URL con progreso</button>
+      </div>
+    `;
+  }
+
+  function copyUrl(url) {
+    navigator.clipboard.writeText(url).then(() => {
+      const btn = document.getElementById('copy-btn');
+      if (btn) { btn.textContent = '✅ ¡Copiada!'; setTimeout(() => btn.textContent = '📋 Copiar URL con progreso', 2500); }
+    });
+  }
+
+  init();
+</script>
+</body>
+</html>
